@@ -102,8 +102,10 @@ class ProjectsController extends Controller
     }
 
     public function featured(){
+        $featuredProjects = Project::where("is_featured", true)->orderBy("order", "asc")->get();
+
         return response()->json([
-            "response" => Project::where("is_featured", true)->get(),
+            "response" => $featuredProjects,
         ]);
     }
 

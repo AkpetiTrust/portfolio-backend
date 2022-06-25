@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -36,4 +37,13 @@ class AuthController extends Controller
             'response' => 'Logged out'
         ];
     }
+
+    public function updatePassword(Request $request){
+        Auth::user()->update(["password" => Hash::make($request->password)]);
+
+        return [
+            'response' => 'Password updated successfully'
+        ];
+    }
+
 }
