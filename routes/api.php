@@ -25,6 +25,7 @@ Route::get("/settings", [SettingsController::class, "index"]);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/update-password', [AuthController::class, 'updatePassword']);
     Route::resource('messages', MessagesController::class)->only(['index', 'destroy']);
     Route::post('delete-messages', [MessagesController::class, "deleteMessages"]);
     Route::resource('projects', ProjectsController::class)->except(['create', 'edit']);
