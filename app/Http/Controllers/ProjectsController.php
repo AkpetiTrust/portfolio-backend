@@ -111,7 +111,7 @@ class ProjectsController extends Controller
 
 
     public function updateOrder(Request $request){
-       $idsToOrder = json_decode($request->ids_to_order);
+       $idsToOrder = $request->ids_to_order;
        foreach ($idsToOrder as $id => $order) {
             Project::find($id)->update(["order" => $order]);
        } 

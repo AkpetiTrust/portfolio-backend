@@ -21,6 +21,7 @@ use App\Http\Controllers\SettingsController;
 Route::post("/login", [AuthController::class, "login"]);
 Route::post("/messages", [MessagesController::class, "store"]);
 Route::get("/projects/featured", [ProjectsController::class, "featured"]);
+Route::get("/projects", [ProjectsController::class, "index"]);
 Route::get("/settings", [SettingsController::class, "index"]);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -28,7 +29,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/update-password', [AuthController::class, 'updatePassword']);
     Route::resource('messages', MessagesController::class)->only(['index', 'destroy']);
     Route::post('delete-messages', [MessagesController::class, "deleteMessages"]);
-    Route::resource('projects', ProjectsController::class)->except(['create', 'edit']);
-    Route::post("/projects/reorder", [ProjectsController::class, "updateOrder"]);
+    Route::resource('projects', ProjectsController::class)->except(['create', 'edit', 'index', 'update']);
+    Route::post('projects/{id}', [ProjectsController::class, "update"]);
+    Route::post("/reorder-projects", [ProjectsController::class, "updateOrder"]);
     Route::post("/settings", [SettingsController::class, "update"]);
 });
