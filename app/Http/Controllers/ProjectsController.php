@@ -121,4 +121,13 @@ class ProjectsController extends Controller
        ]);
     }
 
+    public function updateFeatured(Request $request, $id){
+        $is_featured = $request->is_featured;
+        Project::find($id)->update(["is_featured" => $is_featured]);
+
+        return response()->json([
+            "response" => "Update successful",
+       ]);
+    }
+
 }

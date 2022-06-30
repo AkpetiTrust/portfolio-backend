@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('delete-messages', [MessagesController::class, "deleteMessages"]);
     Route::resource('projects', ProjectsController::class)->except(['create', 'edit', 'index', 'update']);
     Route::post('projects/{id}', [ProjectsController::class, "update"]);
+    Route::post('update-featured/{id}', [ProjectsController::class, "updateFeatured"]);
     Route::post("/reorder-projects", [ProjectsController::class, "updateOrder"]);
     Route::post("/settings", [SettingsController::class, "update"]);
 });
